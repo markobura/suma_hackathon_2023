@@ -23,7 +23,7 @@ def run_c_program(request):
     except subprocess.CalledProcessError as e:
         # If there was an error compiling the program, return an error response
         error_message = e.output.decode('utf-8')
-        return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_200_OK, data={'output': error_message, 'state': 'Compiling error'})
 
     # Run the program with the provided input and capture its output
     try:
@@ -31,7 +31,7 @@ def run_c_program(request):
     except subprocess.CalledProcessError as e:
         # If there was an error running the program, return an error response
         error_message = e.output.strip()
-        return Response({'error': error_message})
+        return Response(status=status.HTTP_200_OK, data={'error': error_message, 'state': 'Runtime error'})
 
     # Return the output of the program as a JSON response
-    return Response({'output': output})
+    return Response(status=status.HTTP_200_OK, data={'output': output, 'state': 'Executed'})
