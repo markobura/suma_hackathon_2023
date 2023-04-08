@@ -11,12 +11,15 @@ const CodeEditorWindow = () => {
 
   return (
     <Editor
-      height="85vh"
+      height={`100%`}
       width={`100%`}
       language={"javascript"}
       value={value}
       theme="vs-dark"
       defaultValue="// some comment"
+      options={{
+        fontSize: 12,
+      }}
       onChange={handleEditorChange}
     />
   );
