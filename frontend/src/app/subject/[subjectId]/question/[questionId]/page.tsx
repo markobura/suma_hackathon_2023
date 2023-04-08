@@ -1,13 +1,24 @@
 "use client";
 
 import CodeEditorWindow from "@/components/CodeEditorWindow";
-import React from "react";
+import { BACKEND_URL } from "@/constants/api";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 const Question = () => {
   const [openTab, setOpenTab] = React.useState<"problem" | "test">("problem");
 
   const [hints, setHints] = React.useState<string[]>(["hint 1", "hint 2", "hint 3"]);
   const [hintAmount, setHintAmount] = React.useState<number>(0);
+
+  useEffect(() => {
+    axios
+      .post(BACKEND_URL + "code/check_c/", {
+        program: "awd",
+        input: "awd",
+      })
+      .then((res) => console.log(res));
+  }, []);
 
   return (
     <div className="w-full h-full flex">
