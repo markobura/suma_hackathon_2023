@@ -20,7 +20,7 @@ const CodeEditorWindow = () => {
       options={{
         fontSize: 12,
       }}
-      onChange={(value) => console.log(value)}
+      // onChange={(value) => console.log(value)}
     />
   );
 };
