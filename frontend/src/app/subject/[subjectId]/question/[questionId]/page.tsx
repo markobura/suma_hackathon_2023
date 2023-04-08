@@ -4,7 +4,10 @@ import CodeEditorWindow from "@/components/CodeEditorWindow";
 import React from "react";
 
 const Question = () => {
-  const [openTab, setOpenTab] = React.useState(1);
+  const [openTab, setOpenTab] = React.useState<"problem" | "test">("problem");
+
+  const [hints, setHints] = React.useState<string[]>(["hint 1", "hint 2", "hint 3"]);
+  const [hintAmount, setHintAmount] = React.useState<number>(0);
 
   return (
     <div className="w-full h-full flex">
@@ -37,25 +40,47 @@ const Question = () => {
               <li>
                 <a
                   href="#"
-                  onClick={() => setOpenTab(1)}
+                  onClick={() => setOpenTab("problem")}
                   className="inline-block px-4 py-2 text-gray-600 bg-white rounded shadow"
                 >
-                  Code
+                  Problem
                 </a>
               </li>
               <li>
                 <a
                   href="#"
-                  onClick={() => setOpenTab(2)}
+                  onClick={() => setOpenTab("test")}
                   className="inline-block px-4 py-2 text-gray-600 bg-white rounded shadow"
                 >
                   Test
                 </a>
               </li>
             </ul>
-            <div className="p-3 mt-6 bg-white border">
-              <div className={openTab === 1 ? "block" : "hidden"}> aaaaaaaaaa</div>
-              <div className={openTab === 2 ? "block" : "hidden"}>bbbbbbb</div>
+            <div className="p-3 mt-6 w-full">
+              <div className={openTab === "problem" ? "block" : "hidden"}>Zadatak...</div>
+              <div className={openTab === "test" ? "block" : "hidden"}>
+                <div>
+                  <p className="text-red-500">
+                    Your answer had some problems...
+                    <span className="text-black font-bold">Would you like to see some hints?</span>
+                  </p>
+                  <div className="w-full flex flex-col gap-2">
+                    {hints.slice(0, hintAmount).map((hint) => (
+                      <div className="w-full bg-gray-600">
+                        <p className="text-gray-500 font-semibold p-2">{hint}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      className="bg-blue-500 h-1/2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => setHintAmount((prev) => prev + 1)}
+                    >
+                      Show hint
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
