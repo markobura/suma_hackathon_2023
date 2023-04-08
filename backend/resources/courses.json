@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Programming 1",
+    "level": 1
+  },
+  {
+    "id": 2,
+    "name": "Programming 2",
+    "level": 2
+  },
+  {
+    "id": 3,
+    "name": "Programming 3",
+    "level": 3
+  }
+]

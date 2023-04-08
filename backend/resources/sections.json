@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "course": 1,
+    "name": "Entry",
+    "level": 1
+  },
+  {
+    "id": 2,
+    "course": 1,
+    "name": "Entry 2",
+    "level": 1
+  },
+  {
+    "id": 3,
+    "course": 1,
+    "name": "Pointers",
+    "level": 3
+  },
+  {
+    "id": 4,
+    "course": 2,
+    "name": "Recursion",
+    "level": 1
+  },
+  {
+    "id": 5,
+    "course": 2,
+    "name": "Data structures",
+    "level": 2
+  },
+  {
+    "id": 6,
+    "course": 2,
+    "name": "Lists",
+    "level": 2
+  },
+  {
+    "id": 7,
+    "course": 3,
+    "name": "Trees",
+    "level": 2
+  },
+  {
+    "id": 8,
+    "course": 3,
+    "name": "High level algorithms",
+    "level": 3
+  }
+]
