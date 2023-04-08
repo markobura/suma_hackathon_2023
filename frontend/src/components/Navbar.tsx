@@ -5,11 +5,19 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { BACKEND_URL } from "@/constants/api";
+import axios from "axios";
 
 const Navbar = () => {
-  const subjects = ["Programming 1", "Programming 2", "Programming 3"];
+  const [courses, setCourses] = React.useState<{ id: number; name: string }[]>([]);
   const [showSubjects, setShowSubjects] = React.useState(false);
   const router = useRouter();
+
+  React.useEffect(() => {
+    axios.post(`${BACKEND_URL}courses/courses/`).then((res) => {
+      setCourses(res.data);
+    });
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-cyan-950">
@@ -32,15 +40,15 @@ const Navbar = () => {
             {showSubjects && (
               <div className="absolute top-[150%] left-0">
                 <div className="bg-white rounded-md shadow-md p-2 gap-2 flex flex-col">
-                  {subjects.map((subject) => (
+                  {courses.map((subject) => (
                     <span
-                      key={subject}
+                      key={subject.name}
                       className="text-black cursor-pointer whitespace-nowrap"
                       onClick={() => {
                         router.push(`/subject/${subject}`);
                       }}
                     >
-                      {subject}
+                      {subject.name}
                     </span>
                   ))}
                 </div>
