@@ -11,20 +11,29 @@ const Question = () => {
   const [hints, setHints] = React.useState<string[]>(["hint 1", "hint 2", "hint 3"]);
   const [hintAmount, setHintAmount] = React.useState<number>(0);
 
-  useEffect(() => {
+  const [code, setCode] = React.useState("");
+
+  const [output, setOutput] = React.useState("");
+
+  const onSubmitCode = async () => {
     axios
-      .post(BACKEND_URL + "code/check_c/", {
-        program: "awd",
-        input: "awd",
+      .post(`${BACKEND_URL}code/check_c/`, {
+        program: code,
+        input: "",
       })
-      .then((res) => console.log(res));
-  }, []);
+      .then((res) => {
+        setOutput(res.data.output);
+      })
+      .catch((err) => {
+        setOutput(err.response.data.error);
+      });
+  };
 
   return (
     <div className="w-full h-full flex">
       <div className="overlay rounded-md overflow-hidden w-1/2 h-full shadow-4xl">
         <div className="h-4/5">
-          <CodeEditorWindow />
+          <CodeEditorWindow code={code} setCode={setCode} />
         </div>
         <div className="flex gap-4 items-center mt-2">
           <textarea
@@ -33,13 +42,19 @@ const Question = () => {
             className="block p-2.5 text-sm w-80 text-gray-900 bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
             placeholder="Write your input here..."
           />
-          <button className="bg-blue-500 h-1/2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+          <button
+            className="bg-blue-500 h-1/2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={onSubmitCode}
+          >
+            Submit
+          </button>
           <textarea
             id="message"
             disabled
             rows={4}
-            className="block p-2.5 text-sm w-80 text-gray-900 bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            className="block p-2.5 text-sm w-80 text-red-400 bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
             placeholder="Write your input here..."
+            value={output}
           />
         </div>
       </div>
