@@ -24,7 +24,7 @@ const Question = () => {
   const [code, setCode] = React.useState("");
 
   const [input, setInput] = React.useState("");
-  const [output, setOutput] = React.useState("");
+  const [output, setOutput] = React.useState<{ text: string; color: string }>();
 
   const [loading, setLoading] = React.useState(false);
 
@@ -37,12 +37,16 @@ const Question = () => {
 
   const onSubmitCode = async () => {
     axios
-      .post(`${BACKEND_URL}code/check_c/`, {
+      .post<{
+        output: string;
+        state: "Compiling error" | "Runtime error" | "Executed";
+      }>(`${BACKEND_URL}code/check_c/`, {
         program: code,
         input,
       })
       .then((res) => {
-        setOutput(res.data.output);
+        if (res.data.state !== "Executed") setOutput({ text: res.data.output, color: "text-red-500" });
+        else setOutput({ text: res.data.output, color: "" });
       })
       .catch((err) => {
         setOutput(err.response.data.error);
@@ -69,9 +73,12 @@ const Question = () => {
             id="message"
             disabled
             rows={4}
-            className="block p-2.5 text-sm w-1/2 placeholder-stone-600 text-textPrimary bg-primary rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            className={twMerge(
+              "block p-2.5 text-sm w-1/2 placeholder-stone-600 text-textPrimary bg-primary rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none",
+              output?.color
+            )}
             placeholder="Output"
-            value={output}
+            value={output?.text}
           />
         </div>
         <div className="flex flex-row justify-center items-center mt-2">
