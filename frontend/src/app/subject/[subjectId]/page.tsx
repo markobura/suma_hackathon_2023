@@ -35,7 +35,7 @@ const page = () => {
   return (
     <div className="w-full h-full flex gap-3">
       <div className="w-5/12 h-full px-4 border-gray-400">
-        <p className="text-2xl"> Subject: {subject}</p>
+        <p className="text-2xl"> Course: {subject}</p>
         <div className="flex flex-col gap-3 mt-5">
           {sections.map((section) => (
             <div key={section.id - 1000}>
