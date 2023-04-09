@@ -55,7 +55,7 @@ const Question = () => {
           <textarea
             id="message"
             rows={4}
-            className="block p-2.5 text-sm placeholder-black w-80 text-black bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            className="block p-2.5 text-sm placeholder-black w-1/2 text-black bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
             placeholder="Write your input here..."
             onChange={(e)=> {setInput(e.currentTarget.value)}}
           />
@@ -63,7 +63,7 @@ const Question = () => {
             id="message"
             disabled
             rows={4}
-            className="block p-2.5 text-sm w-80 placeholder-black bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            className="block p-2.5 text-sm w-1/2 placeholder-black bg-blue-900/60 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 resize-none"
             placeholder="Output"
             value={output}
           />
@@ -73,7 +73,7 @@ const Question = () => {
             className="bg-blue-500 h-1/2 hover:bg-blue-700 text-white w-1/4 font-bold py-2 px-4 rounded"
             onClick={onSubmitCode}
           >
-            Submit
+            Execute
           </button>
         </div>
       </div>
@@ -104,26 +104,26 @@ const Question = () => {
             <div className="p-3 mt-6 w-full">
               <div className={openTab === "problem" ? "block" : "hidden"}>
                 <p className="text-xl font-bold text-center">{questionTitle}</p>
-                <ReactMarkdown>{questionText}</ReactMarkdown>
+                <ReactMarkdown className="w-full">{questionText}</ReactMarkdown>
               </div>
               <div className={openTab === "test" ? "block" : "hidden"}>
                 <div className={tested ? "block" : "hidden"}>
                   <div className={execution==="Compilation error"? "block" : "hidden"}>
-                    <div className="w-9/10 py-3 px-2 rounded bg-red-500">
+                    <div className="py-3 px-2 rounded bg-red-500">
                       <p className="text-white">
-                        There is a compilation error in your code, would you like some help finding it?
+                        There is a compilation error in your code, do you need help finding it?
                       </p>
                     </div>
                   </div>
                   <div className={execution==="Failure"? "block" : "hidden"}>
-                    <div className="w-9/10 py-3 px-2 rounded  bg-yellow-500">
+                    <div className="py-3 px-2 rounded  bg-yellow-500">
                       <p className="text-black">
                         Your solution isn't correct, would you like a hint?
                       </p>
                     </div>
                   </div>
                   <div className={execution==="Success"? "block" : "hidden"}>
-                    <div className="w-9/10 py-3 px-2 rounded bg-green-500">
+                    <div className="py-3 px-2 rounded bg-green-500">
                       <p className="text-white">
                         Your solution is correct! Do you think there's a way to optimize it?
                       </p>
