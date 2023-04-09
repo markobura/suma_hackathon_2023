@@ -197,10 +197,10 @@ const Question = () => {
                                 setHintsDisplayed(1);
                               });
                           }
-                          setLoading(false);
                         } else {
                           setHintsDisplayed((prev) => prev + 1);
                         }
+                        setLoading(false);
                       }}
                     >
                       {loading ? (
