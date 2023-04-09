@@ -45,7 +45,7 @@ const Navbar = () => {
                       key={subject.name}
                       className="text-black cursor-pointer whitespace-nowrap"
                       onClick={() => {
-                        router.push(`/subject/${subject}`);
+                        router.push(`/subject/${subject.id}`);
                       }}
                     >
                       {subject.name}
