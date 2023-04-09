@@ -7,9 +7,11 @@ import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { BACKEND_URL } from "@/constants/api";
 import axios from "axios";
+import { AiFillStar } from "react-icons/ai";
+import Popup from "./Popup";
 
 const Navbar = () => {
-  const [courses, setCourses] = React.useState<{ id: number; name: string }[]>([]);
+  const [courses, setCourses] = React.useState<{ id: number; name: string; level: string }[]>([]);
   const [showSubjects, setShowSubjects] = React.useState(false);
   const router = useRouter();
 
@@ -20,7 +22,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-cyan-950">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-blue-700">
       <div className="flex justify-start gap-4 items-center p-2">
         <Image src="https://flowbite.com/docs/images/logo.svg" width={40} height={32} alt="Flowbite Logo" />
         <div className="flex gap-5">
@@ -36,24 +38,32 @@ const Navbar = () => {
             className="relative text-white cursor-pointer inline-flex justify-center items-center gap-2"
             onClick={() => setShowSubjects(!showSubjects)}
           >
-            Classes {showSubjects ? <BiChevronUp /> : <BiChevronDown />}
-            {showSubjects && (
-              <div className="absolute top-[150%] left-0">
-                <div className="bg-white rounded-md shadow-md p-2 gap-2 flex flex-col">
-                  {courses.map((subject) => (
+            Courses {showSubjects ? <BiChevronUp /> : <BiChevronDown />}
+            <Popup show={showSubjects} onClickOutside={() => setShowSubjects(false)} className="top-[170%] left-0">
+              <div>
+                <div className="bg-white shadow-md p-2 gap-2 flex flex-col">
+                  {courses.map((course, index) => (
                     <span
-                      key={subject.name}
-                      className="text-black cursor-pointer whitespace-nowrap"
+                      key={course.name}
+                      className={twMerge(
+                        "text-black cursor-pointer whitespace-nowrap border-b border-b-slate-300 py-2 px-4 hover:bg-stone-300 inline-flex justify-between min-w-[250px]",
+                        index === courses.length - 1 && "border-b-0"
+                      )}
                       onClick={() => {
-                        router.push(`/subject/${subject.id}`);
+                        router.push(`/subject/${course.id}`);
                       }}
                     >
-                      {subject.name}
+                      {course.name}
+                      <span className="inline-flex justify-center items-center">
+                        {Array.from({ length: parseInt(course.level) }).map((_, index) => (
+                          <AiFillStar key={index} />
+                        ))}
+                      </span>
                     </span>
                   ))}
                 </div>
               </div>
-            )}
+            </Popup>
           </div>
           {/* dropdown with list of subjects */}
         </div>
