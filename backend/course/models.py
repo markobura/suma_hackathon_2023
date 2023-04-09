@@ -11,7 +11,7 @@ class CourseLevel(models.TextChoices):
 class TestCase(models.Model):
     question = models.ForeignKey(to="Question", on_delete=models.CASCADE)
     input = models.TextField()
-    output = models.TextField()
+    output = models.TextField(blank=True)
 
     objects = models.Manager()
 
@@ -47,12 +47,13 @@ class Section(models.Model):
         return Question.objects.filter(section=self)
 
     def __str__(self):
-        return f"Section - {self.name}"
+        return f"Section - {self.name} - course {self.course}"
 
 
 class Course(models.Model):
     name = models.CharField(max_length=64, null=True, blank=True)
     level = models.CharField(max_length=2, choices=CourseLevel.choices, default=CourseLevel.EASY)
+    description = models.TextField(blank=True, null=True)
 
     objects = models.Manager()
 
