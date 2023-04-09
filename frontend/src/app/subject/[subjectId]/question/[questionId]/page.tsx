@@ -130,13 +130,13 @@ const Question = () => {
                 </button>
               </div>
               <div className={openTab === "test" ? "block" : "hidden"}>
+                <div
+                  className="flex gap-2 items-center cursor-pointer w-fit border-b border-b-stone-500 mb-4 px-2"
+                  onClick={() => setOpenTab("problem")}
+                >
+                  <BiArrowBack /> <span>Go Back</span>
+                </div>
                 <div className={tested ? "block" : "hidden"}>
-                  <div
-                    className="flex gap-2 items-center cursor-pointer w-fit border-b border-b-stone-500 mb-4 px-2"
-                    onClick={() => setOpenTab("problem")}
-                  >
-                    <BiArrowBack /> <span>Go Back</span>
-                  </div>
                   <div className={execution === "Compilation error" ? "block" : "hidden"}>
                     <div className="py-3 px-2 rounded bg-red-500">
                       <p className="text-white">
