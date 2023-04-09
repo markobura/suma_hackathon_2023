@@ -35,7 +35,7 @@ class CourseMinSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ["id", "name"]
+        fields = ["id", "name", "level"]
 
 
 class CourseSerializer(serializers.ModelSerializer):

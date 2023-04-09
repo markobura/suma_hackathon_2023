@@ -12,5 +12,6 @@
     "name": "Questions no.2",
     "text": "Text2",
     "solved_code": "#include <stdio.h>\n\nint main() {\n    int a, b, c, max;\n    scanf(\"%d %d %d\", &a, &b, &c);\n    \n    if (a >= b && a >= c) {\n        max = a;\n    } else if (b >= a && b >= c) {\n        max = b;\n    } else {\n        max = c;\n    }\n    \n    printf(\"%d\\n\", max);\n    return 0;\n}\n"
-  }
+  },
+  "#include <stdio.h>\n\nint linearSearch(int arr[], int n, int x)\n{\n    for (int i = 0; i < n; i++)\n    {\n        if (arr[i] == x)\n            return i;\n    }\n    return -1;\n}\n\nint main()\n{\n    int n, x;\n    scanf(\"%d\", &n); // read array size from input\n    int arr[n];\n    for (int i = 0; i < n; i++)\n        scanf(\"%d\", &arr[i]); // read array elements from input\n    scanf(\"%d\", &x); // read target element from input\n    int index = linearSearch(arr, n, x);\n    if (index == -1)\n        printf(\"-1\"); // target element not found\n    else\n        printf(\"%d\", index); // target element found at index\n    return 0;\n}\n"
 ]
