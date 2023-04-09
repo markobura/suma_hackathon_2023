@@ -14,7 +14,7 @@ def run_c_program(request):
     input_str = request.data.get('input', '')
     program_str = request.data.get('program')
     if program_str is None:
-        return Response({'error': 'Both input and program fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Program fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Create a temporary file to hold the program code
     with open('temp.c', 'w') as f:
