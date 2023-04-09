@@ -35,8 +35,15 @@ def give_optimization_suggestions(my_code: str, task: str):
     prompt += f"This is task: {task}"
     prompt += f"This is my code: {my_code}"
 
-    res = generate_response(prompt)
-    return json.loads(res)
+    while True:
+        try:
+            res = generate_response(prompt)
+            res = json.loads(res)
+            break
+        except Exception as e:
+            print('test')
+            continue
+    return res
 
 
 def give_compilation_error_explanation(compilation_error: str, my_code: str):
